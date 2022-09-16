@@ -247,7 +247,8 @@ class TimestampMaker(ChrisApp):
             default=False,
             optional=True,
             type=bool,
-            help="Print cmmand used to add timestamp",
+            action="store_true",
+            help="Print command used to add timestamp",
         )
 
     def run(self, options):
@@ -257,7 +258,7 @@ class TimestampMaker(ChrisApp):
         print(Gstr_title)
         print("Version: %s" % self.get_version())
 
-        if options.background != options.font_color:
+        if options.background == options.font_color:
             raise Exception(
                 "Background color can not be the same as the foreground color"
             )
@@ -317,10 +318,13 @@ class TimestampMaker(ChrisApp):
                     options.require,
                 ]
             )
+
         for file in os.listdir(options.inputdir):
+            cmd_with_files: list = []
+            cmd_with_files = [line for line in cmd]
             in_file = os.path.join(options.inputdir, file)
             out_file = os.path.join(options.outputdir, file)
-            cmd.extend(
+            cmd_with_files.extend(
                 [
                     in_file,
                     out_file,
@@ -330,8 +334,8 @@ class TimestampMaker(ChrisApp):
                 print(f"File {out_file} already exists, skipping")
             else:
                 if options.debug:
-                    print(f'Running Command: {" ".join(map(str, cmd))}')
-                subprocess.run(cmd, check=True)
+                    print(f'Running Command: {" ".join(map(str, cmd_with_files))}')
+                subprocess.run(cmd_with_files, check=True)
 
     def show_man_page(self):
         """
