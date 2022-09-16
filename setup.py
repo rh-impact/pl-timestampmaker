@@ -6,12 +6,12 @@ with open(path.join(path.dirname(path.abspath(__file__)), 'README.rst')) as f:
 
 setup(
     name             = 'timestampmaker',
-    version          = '0.1',
+    version          = '0.1.0',
     description      = 'Create timestamps for the ChRIS project(s).',
     long_description = readme,
     author           = 'barbacbd',
     author_email     = 'bbarbach@redhat.com',
-    url              = 'http://wiki',
+    url              = 'https://github.com/rh-impact/pl-timestampmaker',
     packages         = ['timestampmaker'],
     install_requires = ['chrisapp'],
     test_suite       = 'nose.collector',

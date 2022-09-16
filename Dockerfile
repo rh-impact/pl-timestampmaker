@@ -22,7 +22,9 @@
 #
 
 FROM python:3.9.1-slim-buster
-LABEL maintainer="barbacbd <bbarbach@redhat.com>"
+LABEL org.opencontainers.image.authors="Brent Barbachem <bbarbach@redhat.com>" \
+      org.opencontainers.image.title="TimestampMaker ChRIS plugin" \
+      org.opencontainers.image.description="ChRIS plugin that allows the creation of timestamps on images/videos"
 
 WORKDIR /usr/local/src
 
