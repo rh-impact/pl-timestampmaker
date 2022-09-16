@@ -122,7 +122,12 @@ Put some examples here!
 
 .. code:: bash
 
-docker run --rm -it -v $(pwd)/in:/incoming -v $(pwd)/out:/outgoing --privileged local/pl_timestampmaker timestampmaker /incoming /outgoing
+    docker run --rm -it                                         \
+        -v $(pwd)/in:/incoming -v $(pwd)/out:/outgoing          \
+        -privileged local/pl_timestampmaker timestampmaker      \
+        /incoming /outgoing
+
+
 
 .. image:: https://raw.githubusercontent.com/FNNDSC/cookiecutter-chrisapp/master/doc/assets/badge/light.png
     :target: https://chrisstore.co
