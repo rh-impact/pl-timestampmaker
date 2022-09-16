@@ -291,6 +291,12 @@ class TimestampMaker(ChrisApp):
         if options.require != "":
             cmd.extend(["--require", options.require])
 
+        if not os.path.exists(options.inputdir):
+            raise FileNotFoundError("input directory %s does not exist" % options.inputdir)
+        
+        if not os.path.exists(options.outputdir):
+            raise FileNotFoundError("output directory %s does not exist" % options.outputdir)
+
         for file in os.listdir(options.inputdir):
             out_file = os.path.join(options.outputdir, file)
             
