@@ -15,7 +15,7 @@ setup(
     packages         = ['timestampmaker'],
     install_requires = ['chrisapp'],
     test_suite       = 'nose.collector',
-    tests_require    = ['nose'],
+    tests_require    = ['nose', 'mock'],
     license          = 'MIT',
     zip_safe         = False,
     python_requires  = '>=3.6',
