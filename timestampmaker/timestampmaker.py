@@ -259,83 +259,54 @@ class TimestampMaker(ChrisApp):
         print("Version: %s" % self.get_version())
 
         if options.background == options.font_color:
-            raise Exception(
+            raise RuntimeError(
                 "Background color can not be the same as the foreground color"
             )
 
-        cmd = [
-            "timestamp",
-        ]
+        cmd = ["timestamp"]
+        
         if options.format != "%Y-%m-%d %H:%M:%S":
-            cmd.extend(
-                [
-                    "--format",
-                    options.format,
-                ]
-            )
+            cmd.extend(["--format", options.format])
+            
         if options.time != "":
-            cmd.extend(
-                [
-                    "--time",
-                    options.time,
-                ]
-            )
+            cmd.extend(["--time", options.time])
+            
         cmd.extend(
             [
-                "--font-size",
-                options.font_size,
-                "--font-family",
-                options.font_family,
-                "--font-color",
-                options.font_color,
-                "--background-color",
-                options.background,
+                "--font-size", options.font_size,
+                "--font-family", options.font_family,
+                "--font-color", options.font_color,
+                "--background-color", options.background
             ]
         )
+        
         if options.timezone != "":
-            cmd.extend(
-                [
-                    "--time-zone",
-                    options.timezone,
-                ]
-            )
+            cmd.extend(["--time-zone", options.timezone])
+            
         cmd.extend(
             [
-                "--coordinate-origin",
-                options.origin,
-                "-x",
-                options.x,
-                "-y",
-                options.y,
-                "--font-padding",
-                options.font_padding,
+                "--coordinate-origin", options.origin,
+                "-x", options.x,
+                "-y", options.y,
+                "--font-padding", options.font_padding,
             ]
         )
+        
         if options.require != "":
-            cmd.extend(
-                [
-                    "--require",
-                    options.require,
-                ]
-            )
+            cmd.extend(["--require", options.require])
 
         for file in os.listdir(options.inputdir):
-            cmd_with_files: list = []
-            cmd_with_files = [line for line in cmd]
-            in_file = os.path.join(options.inputdir, file)
             out_file = os.path.join(options.outputdir, file)
-            cmd_with_files.extend(
-                [
-                    in_file,
-                    out_file,
-                ]
-            )
+            
             if os.path.exists(out_file):
                 print(f"File {out_file} already exists, skipping")
             else:
+                full_cmd = cmd + [os.path.join(options.inputdir, file), out_file]
+                
                 if options.debug:
-                    print(f'Running Command: {" ".join(map(str, cmd_with_files))}')
-                subprocess.run(cmd_with_files, check=True)
+                    print(f'Running Command: {" ".join(map(str, full_cmd))}')
+
+                subprocess.run(full_cmd, check=True)
 
     def show_man_page(self):
         """
