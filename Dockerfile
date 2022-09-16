@@ -29,8 +29,10 @@ LABEL org.opencontainers.image.authors="Brent Barbachem <bbarbach@redhat.com>" \
 WORKDIR /usr/local/src
 
 COPY requirements.txt .
+COPY test_requirements.txt
 
 RUN pip install -r requirements.txt && \
+    pip install -r test_requirements.txt && \
     apt-get -y update && \
     apt-get -y upgrade && \
     apt-get -y install ruby \
