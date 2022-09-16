@@ -259,7 +259,7 @@ class TimestampMaker(ChrisApp):
                 "Background color can not be the same as the foreground color"
             )
 
-        cmd = ["timestamp"]
+        cmd = ["timestampmaker"]
         
         if options.format != "%Y-%m-%d %H:%M:%S":
             cmd.extend(["--format", options.format])
@@ -305,7 +305,7 @@ class TimestampMaker(ChrisApp):
             else:
                 full_cmd = cmd + [os.path.join(options.inputdir, file), out_file]
                 
-                if options.verbosity >= DEBUG_LEVEL:
+                if int(options.verbosity) >= DEBUG_LEVEL:
                     print(f'Running Command: {" ".join(map(str, full_cmd))}')
 
                 subprocess.run(full_cmd, check=True)
