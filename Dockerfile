@@ -29,7 +29,7 @@ LABEL org.opencontainers.image.authors="Brent Barbachem <bbarbach@redhat.com>" \
 WORKDIR /usr/local/src
 
 COPY requirements.txt .
-COPY test_requirements.txt
+COPY test_requirements.txt .
 
 RUN pip install -r requirements.txt && \
     pip install -r test_requirements.txt && \
