@@ -2,6 +2,7 @@
 from unittest import TestCase
 from unittest import mock
 from timestampmaker.timestampmaker import TimestampMaker
+from os import mkdir
 
 
 class TimestampMakerTests(TestCase):
