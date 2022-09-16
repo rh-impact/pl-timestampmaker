@@ -85,6 +85,11 @@ where necessary.)
         If specified, print version number and exit.
 """
 
+# The DEBUG_LEVEL is minimum number of -v options required
+# to force the debug statements to be printed.
+# Assumes 0 = CRITICAL
+DEBUG_LEVEL = 3
+
 
 class TimestampMaker(ChrisApp):
     """
@@ -241,15 +246,6 @@ class TimestampMaker(ChrisApp):
             type=str,
             help="Comma-separated Ruby libs",
         )
-        self.add_argument(
-            "--debug",
-            dest="debug",
-            default=False,
-            optional=True,
-            type=bool,
-            action="store_true",
-            help="Print command used to add timestamp",
-        )
 
     def run(self, options):
         """
@@ -303,7 +299,7 @@ class TimestampMaker(ChrisApp):
             else:
                 full_cmd = cmd + [os.path.join(options.inputdir, file), out_file]
                 
-                if options.debug:
+                if options.verbosity >= DEBUG_LEVEL:
                     print(f'Running Command: {" ".join(map(str, full_cmd))}')
 
                 subprocess.run(full_cmd, check=True)
