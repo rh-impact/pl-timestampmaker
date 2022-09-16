@@ -27,9 +27,19 @@ LABEL maintainer="barbacbd <bbarbach@redhat.com>"
 WORKDIR /usr/local/src
 
 COPY requirements.txt .
-RUN pip install -r requirements.txt
+
+RUN pip install -r requirements.txt && \
+    apt-get -y update && \
+    apt-get -y upgrade && \
+    apt-get -y install ruby \
+                       ffmpeg \
+                       imagemagick \
+                       tzdata && \
+    rm -rf /var/lib/apt/lists/* && \
+    gem install --no-document timestamp_maker -v 1.3.1
 
 COPY . .
+
 RUN pip install .
 
 CMD ["timestampmaker", "--help"]
