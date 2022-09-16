@@ -260,13 +260,13 @@ class TimestampMaker(ChrisApp):
             )
 
         cmd = ["timestamp"]
-        
+
         if options.format != "%Y-%m-%d %H:%M:%S":
             cmd.extend(["--format", options.format])
-            
+
         if options.time != "":
             cmd.extend(["--time", options.time])
-            
+
         cmd.extend(
             [
                 "--font-size", options.font_size,
@@ -275,10 +275,10 @@ class TimestampMaker(ChrisApp):
                 "--background-color", options.background
             ]
         )
-        
+
         if options.timezone != "":
             cmd.extend(["--time-zone", options.timezone])
-            
+
         cmd.extend(
             [
                 "--coordinate-origin", options.origin,
@@ -287,25 +287,25 @@ class TimestampMaker(ChrisApp):
                 "--font-padding", options.font_padding,
             ]
         )
-        
+
         if options.require != "":
             cmd.extend(["--require", options.require])
 
         if not os.path.exists(options.inputdir):
             raise FileNotFoundError("input directory %s does not exist" % options.inputdir)
-        
+
         if not os.path.exists(options.outputdir):
             raise FileNotFoundError("output directory %s does not exist" % options.outputdir)
 
         for file in os.listdir(options.inputdir):
             out_file = os.path.join(options.outputdir, file)
-            
+
             if os.path.exists(out_file):
                 print(f"File {out_file} already exists, skipping")
             else:
                 full_cmd = cmd + [os.path.join(options.inputdir, file), out_file]
-                
-                if options.verbosity >= DEBUG_LEVEL:
+
+                if int(options.verbosity) >= DEBUG_LEVEL:
                     print(f'Running Command: {" ".join(map(str, full_cmd))}')
 
                 subprocess.run(full_cmd, check=True)
