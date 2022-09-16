@@ -22,7 +22,7 @@ Create timestamps for the ChRIS project(s).
 Description
 -----------
 
-``timestampmaker`` is a *ChRIS ds-type* plugin application that adds the date and time to image(s) and video(s) based on their creation time.
+``timestampmaker`` is a *ChRIS ds-type* plugin application that adds the date and time to image(s) and video(s) based on their creation time. This plugin can handle multiple files of differing types instead of a single file at a time.
 
 
 Usage
@@ -81,7 +81,7 @@ Getting inline help
 Run
 ~~~
 
-You need to specify input and output directories using the `-v` flag to `docker run`.
+You need to specify input and output directories using the ``-v`` flag to ``docker run``.
 
 
 .. code:: bash
@@ -118,7 +118,7 @@ Run unit tests:
 Examples
 --------
 
-Put some examples here!
+The example code reads the files from ``/incoming`` folder, timestamps them and saves them in the ``/outgoing`` folder. 
 
 .. code:: bash
 
