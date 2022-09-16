@@ -160,7 +160,7 @@ class TimestampMaker(ChrisApp):
             "-ff",
             "--font-family",
             dest="font_family",
-            default="'DejaVu Sans'",
+            default="DejaVu Sans",
             choices=(
                 "Century Schoolbook",
                 "DejaVu Sans",
@@ -259,7 +259,7 @@ class TimestampMaker(ChrisApp):
                 "Background color can not be the same as the foreground color"
             )
 
-        cmd = ["timestampmaker"]
+        cmd = ["timestamp"]
 
         if options.format != "%Y-%m-%d %H:%M:%S":
             cmd.extend(["--format", options.format])
@@ -304,10 +304,12 @@ class TimestampMaker(ChrisApp):
                 print(f"File {out_file} already exists, skipping")
             else:
                 full_cmd = cmd + [os.path.join(options.inputdir, file), out_file]
+                # full_cmd = cmd + [options.inputdir, options.outputdir]
                 if int(options.verbosity) >= DEBUG_LEVEL:
                     print(f'Running Command: {" ".join(map(str, full_cmd))}')
 
                 subprocess.run(full_cmd, check=True)
+                break
 
     def show_man_page(self):
         """
