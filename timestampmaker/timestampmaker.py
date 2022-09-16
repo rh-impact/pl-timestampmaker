@@ -259,7 +259,7 @@ class TimestampMaker(ChrisApp):
                 "Background color can not be the same as the foreground color"
             )
 
-        cmd = ["timestampmaker"]
+        cmd = ["timestamp"]
 
         if options.format != "%Y-%m-%d %H:%M:%S":
             cmd.extend(["--format", options.format])
