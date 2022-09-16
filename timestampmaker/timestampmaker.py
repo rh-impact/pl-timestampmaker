@@ -9,6 +9,7 @@
 #
 
 from chrisapp.base import ChrisApp
+import os
 import subprocess
 
 Gstr_title = r"""
@@ -154,7 +155,7 @@ class TimestampMaker(ChrisApp):
             "-ff",
             "--font-family",
             dest="font_family",
-            default="DejaVu Sans",
+            default="'DejaVu Sans'",
             choices=(
                 "Century Schoolbook",
                 "DejaVu Sans",
@@ -240,6 +241,14 @@ class TimestampMaker(ChrisApp):
             type=str,
             help="Comma-separated Ruby libs",
         )
+        self.add_argument(
+            "--debug",
+            dest="debug",
+            default=False,
+            optional=True,
+            type=bool,
+            help="Print cmmand used to add timestamp",
+        )
 
     def run(self, options):
         """
@@ -248,17 +257,21 @@ class TimestampMaker(ChrisApp):
         print(Gstr_title)
         print("Version: %s" % self.get_version())
 
-        try:
-            assert options.background != options.font_color
-        except AssertionError:
+        if options.background != options.font_color:
             raise Exception(
                 "Background color can not be the same as the foreground color"
             )
+
         cmd = [
             "timestamp",
-            "--format",
-            options.format,
         ]
+        if options.format != "%Y-%m-%d %H:%M:%S":
+            cmd.extend(
+                [
+                    "--format",
+                    options.format,
+                ]
+            )
         if options.time != "":
             cmd.extend(
                 [
@@ -304,10 +317,21 @@ class TimestampMaker(ChrisApp):
                     options.require,
                 ]
             )
-        print(
-            f'Running Command: {" ".join(map(str, cmd))} {options.inputdir} {options.outputdir}'
-        )
-        subprocess.run(cmd, check=True)
+        for file in os.listdir(options.inputdir):
+            in_file = os.path.join(options.inputdir, file)
+            out_file = os.path.join(options.outputdir, file)
+            cmd.extend(
+                [
+                    in_file,
+                    out_file,
+                ]
+            )
+            if os.path.exists(out_file):
+                print(f"File {out_file} already exists, skipping")
+            else:
+                if options.debug:
+                    print(f'Running Command: {" ".join(map(str, cmd))}')
+                subprocess.run(cmd, check=True)
 
     def show_man_page(self):
         """
