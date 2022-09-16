@@ -270,7 +270,7 @@ class TimestampMaker(ChrisApp):
         cmd.extend(
             [
                 "--font-size", options.font_size,
-                "--font-family", options.font_family,
+                "--font-family", f"{options.font_family}",
                 "--font-color", options.font_color,
                 "--background-color", options.background
             ]
