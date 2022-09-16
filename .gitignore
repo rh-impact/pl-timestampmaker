@@ -8,3 +8,6 @@ htmlcov
 .docker
 .idea/
 .vscode/
+venv/
+in/
+out/
