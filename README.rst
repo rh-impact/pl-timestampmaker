@@ -1,14 +1,14 @@
 Timestamp maker plugin
 ================================
 
-.. image:: https://img.shields.io/docker/v/fnndsc/pl-timestampmaker?sort=semver
-    :target: https://hub.docker.com/r/fnndsc/pl-timestampmaker
+.. image:: https://img.shields.io/docker/v/rh-impact/pl-timestampmaker?sort=semver
+    :target: https://hub.docker.com/r/rh-impact/pl-timestampmaker
 
 .. image:: https://img.shields.io/github/license/rh-impact/pl-timestampmaker
     :target: https://github.com/rh-impact/pl-timestampmaker/blob/master/LICENSE
 
-.. image:: https://github.com/FNNDSC/pl-timestampmaker/workflows/ci/badge.svg
-    :target: https://github.com/FNNDSC/pl-timestampmaker/actions
+.. image:: https://github.com/rh-impact/pl-timestampmaker/workflows/ci/badge.svg
+    :target: https://github.com/rh-impact/pl-timestampmaker/actions
 
 
 .. contents:: Table of Contents
